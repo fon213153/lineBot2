@@ -25,14 +25,8 @@ def callback():
     sendText(user,userText)
     return '',200
 
-def sendText(user, text):if (userText == 'สวัสดี') :
-        sendText(user,'สวัสดี')
-    elif(userText == 'ทำอะไรอยู่') :
-        sendText(user,'นอนจ้า')
-    elif(userText == 'นอนด้วย') :
-        sendText(user,'ตลกละ!!') 
-    elif :
-        sendText(user, 'ไม่เข้าใจ')
+def         sendText(user, 'ไม่เข้าใจ'
+
   LINE_API = 'https://api.line.me/v2/bot/message/reply'
   headers = {
     'Content-Type': 'application/json; charset=UTF-8',
