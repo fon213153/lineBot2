@@ -3,12 +3,12 @@ import os
 import json
 import requests
 
-app = Flask(__name__)
+app = Flask(_name_)
 
 @app.route('/')
 def index():
     a=os.environ['Authorization']
-    return "นายภูวลักษณ์ ภู่พงศ์ธร เลขที่ 8 ชั้น ม.4/3"
+    return "นายราเมศ อยู่เจริญ เลขที่ 1 ชั้น ม.4/1"
 
 @app.route("/webhook", methods=['POST'])
 def webhook():
@@ -20,13 +20,21 @@ def callback():
     json_line = request.get_json()
     json_line = json.dumps(json_line)
     decoded = json.loads(json_line)
-    user = decoded["events"][0]['replyToken']
-    userText = decoded["events"][0]['message']['text']
-    sendText(user,userText)
+    user = decoded['originalDetectIntenRequest']['payload']['data']['replyToken']
+    userText = decoded['queryResult']['intent']['displayName']
+    #sendText(user,userText)
+    if (userText == 'สวัสดี') :
+        sendText(user,'สวัสดีค้าบ')
+    elif(userText == 'ทำอะไรอยู่') :
+        sendText(user,'นอนจ้า')
+    elif(userText == 'นอนด้วย') :
+        sendText(user,'ตลกละ!!') 
+    elif :
+        sendText(user, 'ไม่เข้าใจ') 
+        
     return '',200
 
-def         sendText(user, 'ไม่เข้าใจ'
-
+def sendText(user, text):
   LINE_API = 'https://api.line.me/v2/bot/message/reply'
   headers = {
     'Content-Type': 'application/json; charset=UTF-8',
@@ -38,5 +46,5 @@ def         sendText(user, 'ไม่เข้าใจ'
   })
   r = requests.post(LINE_API, headers=headers, data=data) # ส่งข้อมูล
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     app.run()
